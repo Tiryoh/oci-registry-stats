@@ -31,6 +31,10 @@ The command writes:
 - `data/latest.csv`
 - `data/shields/*.json`
 
+## License
+
+MIT License. See [LICENSE](LICENSE).
+
 ## References
 
 This project was created with reference to
