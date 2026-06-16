@@ -38,13 +38,15 @@ def historical_diff(
         for snapshot in snapshots
         if snapshot.status == "ok"
         and snapshot.metrics.total_downloads is not None
-        and snapshot.collected_at <= target_time
         and _same_identity_for_diff(current, snapshot)
     ]
     if not candidates:
         return None, None
 
-    baseline = max(candidates, key=lambda snapshot: snapshot.collected_at)
+    baseline = min(
+        candidates,
+        key=lambda snapshot: abs((snapshot.collected_at - target_time).total_seconds()),
+    )
     delta = target_time - baseline.collected_at
     if abs(delta.total_seconds()) > tolerance_hours * 3600:
         return None, None

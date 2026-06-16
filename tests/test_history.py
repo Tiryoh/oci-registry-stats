@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from registry_stats.history import historical_diff
 from registry_stats.models import Snapshot
@@ -15,7 +15,7 @@ def _snapshot(total: int, days_ago: int = 0, version_id: str | None = None) -> S
         target_id="target",
         registry="ghcr" if version_id else "dockerhub",
         scope="tag" if version_id else "repository",
-        collected_at=NOW if days_ago == 0 else NOW.replace(day=NOW.day - days_ago),
+        collected_at=NOW - timedelta(days=days_ago),
         status="ok",
         identity=identity,
         metrics={"total_downloads": total},
@@ -33,6 +33,25 @@ def test_historical_diff_returns_none_without_baseline() -> None:
     value, warning = historical_diff(_snapshot(1300), [], 30, 36)
 
     assert value is None
+    assert warning is None
+
+
+def test_historical_diff_uses_nearest_snapshot_within_tolerance() -> None:
+    snapshots = [
+        _snapshot(900, 8),
+        Snapshot(
+            target_id="target",
+            registry="dockerhub",
+            scope="repository",
+            collected_at=NOW - timedelta(days=7) + timedelta(hours=1),
+            status="ok",
+            metrics={"total_downloads": 1000},
+        ),
+    ]
+
+    value, warning = historical_diff(_snapshot(1300), snapshots, 7, 36)
+
+    assert value == 300
     assert warning is None
 
 

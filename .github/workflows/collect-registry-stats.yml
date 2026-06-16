@@ -3,6 +3,7 @@ name: Collect registry stats
 on:
   workflow_dispatch:
   schedule:
+    # Daily at 09:15 JST (00:15 UTC).
     - cron: "15 0 * * *"
 
 concurrency:
@@ -17,16 +18,15 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.3
 
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v8.2.0
         with:
-          python-version: "3.12"
+          enable-cache: true
 
-      - name: Install
+      - name: Install Python
         run: |
-          python -m pip install --upgrade pip
-          pip install -e .
+          uv python install 3.13.2
 
       - name: Collect stats
         env:
@@ -34,12 +34,12 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PAT }}
         run: |
-          registry-stats --config registry-stats.yaml
+          uv run --python 3.13.2 registry-stats --config registry-stats.yaml
 
       - name: Commit stats
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add -f data/
           git commit -m "Update registry stats [skip ci]" || exit 0
           git push
