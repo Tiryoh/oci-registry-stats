@@ -1,0 +1,31 @@
+schema_version: 1
+
+output:
+  dir: data
+  latest_json: latest.json
+  latest_csv: latest.csv
+  snapshots_dir: snapshots
+  shields_dir: shields
+
+collection:
+  user_agent: "registry-stats/0.1 (+https://github.com/Tiryoh/oci-registry-stats)"
+  timeout_seconds: 20
+  retry_count: 3
+  retry_backoff_seconds: 2
+  history_window_tolerance_hours: 36
+
+targets:
+  - id: dockerhub_ros2_desktop_vnc
+    registry: dockerhub
+    scope: repository
+    namespace: tiryoh
+    repository: ros2-desktop-vnc
+
+  - id: ghcr_ros2_desktop_vnc_package
+    registry: ghcr
+    scope: package
+    owner_type: user
+    owner: Tiryoh
+    package: ros2-desktop-vnc
+    repository_owner: Tiryoh
+    repository_name: docker-ros2-desktop-vnc
