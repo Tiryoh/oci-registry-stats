@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "oci-registry-stats"
 version = "0.1.0"
 description = "Collect Docker Hub and GHCR download statistics"
-readme = "DESIGN.md"
+readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
   "beautifulsoup4>=4.12",
