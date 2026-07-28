@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T03:59:44.558391Z",
+  "generated_at": "2026-07-28T03:32:09.278132Z",
   "targets": [
     {
       "id": "dockerhub_ros2_desktop_vnc",
       "registry": "dockerhub",
       "scope": "repository",
       "name": "tiryoh/ros2-desktop-vnc",
-      "total_downloads": 137202,
-      "weekly_downloads": 1385,
-      "monthly_downloads": 12389,
+      "total_downloads": 137337,
+      "weekly_downloads": 1171,
+      "monthly_downloads": 12292,
       "status": "ok",
       "methods": {
         "total_downloads": "dockerhub_repository_api",
@@ -22,9 +22,9 @@
       "registry": "ghcr",
       "scope": "package",
       "name": "ghcr.io/tiryoh/ros2-desktop-vnc",
-      "total_downloads": 13390,
-      "weekly_downloads": 61,
-      "monthly_downloads": 2952,
+      "total_downloads": 13395,
+      "weekly_downloads": 58,
+      "monthly_downloads": 2915,
       "status": "ok",
       "methods": {
         "total_downloads": "ghcr_package_page_scrape",
