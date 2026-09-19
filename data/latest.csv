@@ -1,3 +1,3 @@
 id,registry,scope,name,total_downloads,weekly_downloads,monthly_downloads,status
-dockerhub_ros2_desktop_vnc,dockerhub,repository,tiryoh/ros2-desktop-vnc,161607,7361,17570,ok
-ghcr_ros2_desktop_vnc_package,ghcr,package,ghcr.io/tiryoh/ros2-desktop-vnc,18522,329,4881,ok
+dockerhub_ros2_desktop_vnc,dockerhub,repository,tiryoh/ros2-desktop-vnc,161957,7552,17823,ok
+ghcr_ros2_desktop_vnc_package,ghcr,package,ghcr.io/tiryoh/ros2-desktop-vnc,18559,297,4910,ok
